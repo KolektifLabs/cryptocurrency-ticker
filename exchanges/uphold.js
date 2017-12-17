@@ -1,6 +1,7 @@
 'use strict';
 
 const request = require('request');
+const TIMEOUT = require('../config').TIMEOUT;
 
 const pairs = [
 	'btc_btc',
@@ -70,7 +71,7 @@ module.exports = {
 				uphold_pair = k.map((e) => { return e; }).join('').toUpperCase();
 				request({
 					url: `https://api.uphold.com/v0/ticker/${uphold_pair}`,
-					timeout: 2000
+					timeout: TIMEOUT
 				}, (err, res, body) => {
 					if(!err && res.statusCode === 200) {
 						console.log(body);

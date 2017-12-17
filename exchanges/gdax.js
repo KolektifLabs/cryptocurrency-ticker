@@ -1,6 +1,7 @@
 'use strict';
 
 const request = require('request');
+const TIMEOUT = require('../config').TIMEOUT;
 
 const pairs = [
 	'btc_ltc',
@@ -39,7 +40,7 @@ module.exports = {
 					headers: {
 					    'User-Agent': 'request'
 					},
-					timeout: 2000
+					timeout: TIMEOUT
 				}, (err, res, body) => {
 					if(!err && res.statusCode === 200) {
 						const x = JSON.parse(body);

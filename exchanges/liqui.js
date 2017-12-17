@@ -1,6 +1,7 @@
 'use strict';
 
 const request = require('request');
+const TIMEOUT = require('../config').TIMEOUT;
 
 const pairs = [
   'ltc_btc',
@@ -124,7 +125,7 @@ module.exports = {
 			if(pairs.includes(pair)) {
 				request({
 					url: `https://api.liqui.io/api/3/ticker/${pair}`,
-					timeout: 2000
+					timeout: TIMEOUT
 				}, (err, res, body) => {
 					if(!err && res.statusCode === 200) {
 						const x = JSON.parse(body)[pair];

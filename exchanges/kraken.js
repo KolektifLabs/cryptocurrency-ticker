@@ -1,6 +1,7 @@
 'use strict';
 
 const request = require('request');
+const TIMEOUT = require('../config').TIMEOUT;
 
 const pairs = [
 	'dash_eur',
@@ -89,7 +90,7 @@ module.exports = {
 				}
 				request({
 					url: `https://api.kraken.com/0/public/Ticker?pair=${kraken_pair}`,
-					timeout: 2000
+					timeout: TIMEOUT
 				}, (err, res, body) => {
 					if(!err && res.statusCode === 200) {
 						const x = JSON.parse(body).result[kraken_pair];

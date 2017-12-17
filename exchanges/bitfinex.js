@@ -1,6 +1,7 @@
 'use strict';
 
 const request = require('request');
+const TIMEOUT = require('../config').TIMEOUT;
 
 const pairs = [
 	'btc_usd',
@@ -38,7 +39,7 @@ module.exports = {
 				bitfinex_pair = k.map((e) => { return e; }).join('');
 				request({
 					url: `https://api.bitfinex.com/v1/ticker/${bitfinex_pair}`,
-					timeout: 2000
+					timeout: TIMEOUT
 				}, (err, res, body) => {
 					if(!err && res.statusCode === 200) {
 						const x = JSON.parse(body);

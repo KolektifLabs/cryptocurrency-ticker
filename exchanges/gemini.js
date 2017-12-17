@@ -1,6 +1,7 @@
 'use strict';
 
 const request = require('request');
+const TIMEOUT = require('../config').TIMEOUT;
 
 const pairs = [
 	'btc_usd',
@@ -18,7 +19,7 @@ module.exports = {
 				gemini_pair = k.map((e) => { return e; }).join('');
 				request({
 					url: `https://api.gemini.com/v1/pubticker/${gemini_pair}`,
-					timeout: 2000
+					timeout: TIMEOUT
 				}, (err, res, body) => {
 					if(!err && res.statusCode === 200) {
 						const x = JSON.parse(body);

@@ -1,6 +1,7 @@
 'use strict';
 
 const request = require('request');
+const TIMEOUT = require('../config').TIMEOUT;
 
 const pairs = [
 	'btc_bcn',
@@ -102,7 +103,7 @@ module.exports = {
 			if(pairs.includes(pair)) {
 				request({
 					url: 'https://poloniex.com/public?command=returnTicker',
-					timeout: 2000
+					timeout: TIMEOUT
 				}, (err, res, body) => {
 					if(!err && res.statusCode === 200) {
 						const x = JSON.parse(body)[pair.toUpperCase()];

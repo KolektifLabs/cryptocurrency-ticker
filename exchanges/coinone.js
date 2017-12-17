@@ -1,6 +1,7 @@
 'use strict';
 
 const request = require('request');
+const TIMEOUT = require('../config').TIMEOUT;
 
 const pairs = [
 	'btc_krw',
@@ -16,7 +17,7 @@ module.exports = {
 			if(pairs.includes(pair)) {
 				request({
 					url: `https://api.coinone.co.kr/orderbook/?currency=${pair.split('_').shift()}&format=json`,
-					timeout: 2000
+					timeout: TIMEOUT
 				}, (err, res, body) => {
 					if(!err && res.statusCode === 200) {
 						const x = JSON.parse(body);

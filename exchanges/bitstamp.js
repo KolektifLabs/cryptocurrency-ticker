@@ -1,6 +1,7 @@
 'use strict';
 
 const request = require('request');
+const TIMEOUT = require('../config').TIMEOUT;
 
 const pairs = [
 	'btc_usd',
@@ -24,7 +25,7 @@ module.exports = {
 				bitstamp_pair = k.map((e) => { return e; }).join('');
 				request({
 					url: `	https://www.bitstamp.net/api/v2/ticker/${bitstamp_pair}/`,
-					timeout: 2000
+					timeout: TIMEOUT
 				}, (err, res, body) => {
 					if(!err && res.statusCode === 200) {
 						const x = JSON.parse(body);
