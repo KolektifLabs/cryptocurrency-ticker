@@ -5,6 +5,8 @@ const { expect } = chai;
 
 const ticker = require('../index');
 
+const bitfinex = require('../exchanges/bitfinex');
+
 describe('available exchanges', () => {
 	it('should return an array of available exchanges', (done) => {
 		ticker.availableExchanges().then((exchanges) => {
@@ -17,14 +19,25 @@ describe('available exchanges', () => {
 });
 
 describe('available pairs', () => {
-	it('should return an array of available pairs of an exchange', (done) => {
-		ticker.availablePairs('kraken').then((pairs) => {
-			expect(pairs).to.be.an('array');
+
+    it('should return an array of available exchanges', (done) => {
+		ticker.availableExchanges().then((exchanges) => {
+			exchanges.forEach(exchange => {
+				it(`should return an array of available pairs for ${exchange}`, (done) => {
+					ticker.availablePairs(exchange).then((pairs) => {
+						expect(pairs).to.be.an('array');
+						done();
+					}).catch((err) => {
+						done(err);
+					});
+				});
+			});
+            expect(exchanges).to.be.an('array');
 			done();
 		}).catch((err) => {
 			done(err);
 		});
-	});
+    });
 
 	it('should throw an error', (done) => {
 		ticker.availablePairs('hello').then((pairs) => {
@@ -38,6 +51,10 @@ describe('available pairs', () => {
 
 describe('ticker', () => {
 	[
+        {
+            exchange: 'bitfinex',
+            pair: 'xrp_usd'
+        },
 		{
 			exchange: 'bithumb',
 			pair: 'btc_krw'
@@ -62,27 +79,23 @@ describe('ticker', () => {
 			exchange: 'liqui',
 			pair: 'gno_btc'
 		},
-    {
+    	{
 			exchange: 'gdax',
 			pair: 'btc_eth'
 		},
-    {
+    	{
 			echange: 'gemini',
 			pair: 'btc_usd'
-    },
-    {
+    	},
+    	{
 			exchange: 'lykke',
 			pair: 'btc_jpy'
-    },
-    {
-			exchange: 'bitfinex',
-			pair: 'xrp_usd'
-    },
-    {
+    	},
+    	{
 			exchange: 'bitstamp',
 			pair: 'xrp_usd'
-    },
-    {
+    	},
+    	{
 			exchange: 'uphold',
 			pair: 'xpd_usd'
 		},
