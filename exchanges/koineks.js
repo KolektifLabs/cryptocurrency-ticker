@@ -30,14 +30,13 @@ module.exports = {
         return new Promise((resolve, reject) => {
             if(pairs.includes(pair)) {
                 const k = pair.split('_');
-                let kraken_pair;
-                kraken_pair = k.map((e) => { return symbols[e]; }).join('').toUpperCase();
+                let koineks_pair = k.map((e) => { return symbols[e]; }).join('').toUpperCase();
                 request({
                     url: `https://koineks.com/ticker`,
                     timeout: TIMEOUT
                 }, (err, res, body) => {
                     if(!err && res.statusCode === 200) {
-                        const x = JSON.parse(body)[kraken_pair];
+                        const x = JSON.parse(body)[koineks_pair];
                         resolve({
                             exchange: 'koineks',
                             pair: pair,
