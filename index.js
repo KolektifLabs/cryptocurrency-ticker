@@ -14,6 +14,7 @@ const bitstamp = require('./exchanges/bitstamp');
 const uphold = require('./exchanges/uphold');
 const koinim = require('./exchanges/koinim');
 const koineks = require('./exchanges/koineks');
+const paribu = require('./exchanges/paribu');
 
 const exchanges = {
 	bithumb,
@@ -30,6 +31,7 @@ const exchanges = {
 	uphold,
 	koinim,
 	koineks,
+	paribu
 };
 
 function availableExchanges() {
