@@ -40,7 +40,7 @@ module.exports = {
                         resolve({
                             exchange: 'koineks',
                             pair: pair,
-                            timestamp: (new Date()).getTime(),
+                            timestamp: x.timestamp,
                             ask: parseFloat(x.ask),
                             bid: parseFloat(x.bid)
                         });

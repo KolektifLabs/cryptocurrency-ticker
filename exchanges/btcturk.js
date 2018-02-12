@@ -31,7 +31,7 @@ module.exports = {
                         resolve({
                             exchange: 'btcturk',
                             pair: pair,
-                            timestamp: (new Date()).getTime(),
+                            timestamp: x.timestamp,
                             ask: parseFloat(x.ask),
                             bid: parseFloat(x.bid)
                         });
